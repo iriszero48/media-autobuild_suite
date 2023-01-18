@@ -1546,7 +1546,7 @@ if not exist "%instdir%\msys64\msys2_shell.cmd" (
     echo -------------------------------------------------------------------------------
     echo [System.Net.ServicePointManager]::SecurityProtocol = 'Tls12'; ^
         (New-Object System.Net.WebClient^).DownloadFile(^
-        'https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe', ^
+        'http://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/msys2-x86_64-latest.sfx.exe', ^
         "$PWD\msys2-base.sfx.exe"^) | powershell -NoProfile -Command - || goto :errorMsys
     :unpack
     if exist %build%\msys2-base.sfx.exe (
@@ -1946,7 +1946,7 @@ if %noMintty%==y (
     if exist %build%\%log% del %build%\%log%
     start /I /LOW /WAIT %instdir%\msys64\usr\bin\mintty.exe -d -i /msys2.ico ^
     -t "media-autobuild_suite" --log 2>&1 %build%\%log% /usr/bin/bash -lc ^
-    "%command% %arg%"
+    "export http_proxy=http://127.0.0.1:7890 && export https_proxy=http://127.0.0.1:7890 && %command% %arg%"
 )
 endlocal
 goto :EOF
