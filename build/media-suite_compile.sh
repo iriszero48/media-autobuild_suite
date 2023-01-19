@@ -1,5 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC1090,SC1117,SC1091,SC2119
+export http_proxy=http://127.0.0.1:7890; export https_proxy=http://127.0.0.1:7890;
 shopt -s extglob
 
 if [[ -z $LOCALBUILDDIR ]]; then
