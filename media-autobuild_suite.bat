@@ -1544,10 +1544,10 @@ if not exist "%instdir%\msys64\msys2_shell.cmd" (
     echo.- Download and install msys2 basic system
     echo.
     echo -------------------------------------------------------------------------------
-    echo [System.Net.ServicePointManager]::SecurityProtocol = 'Tls12'; ^
-        (New-Object System.Net.WebClient^).DownloadFile(^
-        'http://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/msys2-x86_64-latest.sfx.exe', ^
-        "$PWD\msys2-base.sfx.exe"^) | powershell -NoProfile -Command - || goto :errorMsys
+    echo $ProgressPreference = 'SilentlyContinue';^
+         Invoke-WebRequest ^
+         'https://mirrors.tuna.tsinghua.edu.cn/msys2/distrib/msys2-x86_64-latest.sfx.exe' ^
+         -OutFile file.exe | powershell -NoProfile -Command - || goto :errorMsys
     :unpack
     if exist %build%\msys2-base.sfx.exe (
         echo -------------------------------------------------------------------------------
